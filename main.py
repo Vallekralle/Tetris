@@ -21,9 +21,21 @@ def main():
                 break
             
             if event.type == pygame.MOUSEBUTTONDOWN:
-                main_menu.chooseMode(pygame.mouse.get_pos())
+                match main_menu.chooseMode(pygame.mouse.get_pos()):
+                    case 1:
+                        onePlayerMode()
+                    case 2:
+                        twoPlayerMode()
         
         WIN.draw(main_menu)
+        
+        
+def onePlayerMode():
+    main_menu.deactivate()
+    
+
+def twoPlayerMode():
+    main_menu.deactivate()
         
 
 if __name__ == "__main__":

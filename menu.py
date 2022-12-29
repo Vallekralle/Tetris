@@ -10,6 +10,8 @@ class Menu():
         self.win_width = win_width
         self.win_height = win_height
         
+        self.active = True
+        
         self.createImg()
         
         
@@ -21,13 +23,19 @@ class Menu():
         }
         
     
-    def draw(self, win):
+    def draw(self, win:object):
         for str, img in self.images.items():
             win.blit(img.image, (img.x, img.y))
 
 
-    def chooseMode(self, mouse_pos):
-        if(self.images["onePlayerButton"].pressed(mouse_pos)):
-            print("One player mode activated!")
-        elif(self.images["twoPlayerButton"].pressed(mouse_pos)):
-            print("Two player mode activated!")
+    def chooseMode(self, mouse_pos:tuple):
+        if self.images["onePlayerButton"].pressed(mouse_pos):
+            return 1
+        elif self.images["twoPlayerButton"].pressed(mouse_pos):
+            return 2
+        return 0
+            
+    
+    def deactivate(self):
+        self.active = False
+    

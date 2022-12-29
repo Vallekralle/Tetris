@@ -18,7 +18,7 @@ class Image:
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
         
         
-    def pressed(self, mouse_pos):
+    def pressed(self, mouse_pos:tuple):
         if(self.x <= mouse_pos[0] <= self.x + self.width and
            self.y <= mouse_pos[1] <= self.y + self.height):
             return True
