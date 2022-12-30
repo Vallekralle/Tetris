@@ -24,7 +24,7 @@ class Window:
     def draw(self, menu:object, board:object):
         self.clock.tick(self.fps)
         
-        self.window.fill((255, 255, 255))
+        self.window.fill((5, 175, 237))
         
         if menu.active:
             menu.draw(self.window)
