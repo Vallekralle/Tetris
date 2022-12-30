@@ -6,17 +6,17 @@ class Board():
     frame_list = []
     
     
-    def __init__(self, win_width, win_height, padY, rectSize, amount):
+    def __init__(self, win_width:int, win_height:int, padY:int, rectSize:int, amount:int):
         self.win_width = win_width
         self.win_height = win_height
         self.padY = padY
         self.amount = amount
         self.rectSize = rectSize
         
-        self.tetromino_height = (self.win_height - self.padY) // 20
+        self.tetromino_size = (self.win_height - self.padY) // 20
         
-        self.frameWidth = self.tetromino_height * 10
-        self.frameHeight = self.tetromino_height * 20
+        self.frameWidth = self.tetromino_size * 10
+        self.frameHeight = self.tetromino_size * 20
         
         self.createFrame()
         
@@ -33,12 +33,12 @@ class Board():
             # Creating the grid    
             for horizontal in range(21):
                 rect_list.append(pygame.Rect(x, y, self.frameWidth, self.rectSize))
-                y += self.tetromino_height
+                y += self.tetromino_size
             y = self.padY
             
             for vertical in range(11):
                 rect_list.append(pygame.Rect(x, y, self.rectSize, self.frameHeight))
-                x += self.tetromino_height            
+                x += self.tetromino_size            
             
             x = (self.win_width // 2 - self.frameWidth // 2) + self.win_width // 4
             
