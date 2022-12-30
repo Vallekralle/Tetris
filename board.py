@@ -6,39 +6,37 @@ class Board():
     frame_list = []
     
     
-    def __init__(self, win_width, win_height, padX, padY, amount):
+    def __init__(self, win_width, win_height, padY, rectSize, amount):
         self.win_width = win_width
         self.win_height = win_height
-        self.padX = padX
         self.padY = padY
         self.amount = amount
+        self.rectSize = rectSize
         
         self.tetromino_height = (self.win_height - self.padY) // 20
         
         self.frameWidth = self.tetromino_height * 10
         self.frameHeight = self.tetromino_height * 20
-        self.rectSize = 2
         
         self.createFrame()
         
 
     def createFrame(self):
         rect_list = []
-        x = self.win_width // 2 // self.amount - self.frameWidth // 2
-        y = self.padY // 2
+        x = ((self.win_width // 2) // self.amount) - (self.frameWidth // 2)
+        y = self.padY
         
         for i in range(1, self.amount + 1):
             for horizontal in range(21):
                 rect_list.append(pygame.Rect(x, y, self.frameWidth, self.rectSize))
                 y += self.tetromino_height
-            y = self.padY // 2
+            y = self.padY
             
             for vertical in range(11):
                 rect_list.append(pygame.Rect(x, y, self.rectSize, self.frameHeight))
                 x += self.tetromino_height
-            x = self.win_width // 2 - self.frameWidth // 2
-            
-            x += self.win_width // 4
+                
+            x = (self.win_width // 2 - self.frameWidth // 2) + self.win_width // 4
             
         self.frame_list.append(rect_list)
                 

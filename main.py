@@ -25,16 +25,16 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 match main_menu.chooseMode(pygame.mouse.get_pos()):
                     case 1:
-                        createBoard(800, 10, 1)
+                        createBoard(10, 2, 1)
                     case 2:
-                        createBoard(10, 10, 2)
+                        createBoard(10, 2, 2)
         
         WIN.draw(main_menu, game_board)
         
 
-def createBoard(padX:int, padY:int, amount:int):
+def createBoard(padY:int, rectSize:int, amount:int):
     global game_board
-    game_board = Board(WIN.width, WIN.height, padX, padY, amount)
+    game_board = Board(WIN.width, WIN.height, padY, rectSize, amount)
     main_menu.deactivate()
         
 
