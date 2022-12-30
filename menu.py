@@ -29,10 +29,11 @@ class Menu():
 
 
     def chooseMode(self, mouse_pos:tuple):
-        if self.images["onePlayerButton"].pressed(mouse_pos):
-            return 1
-        elif self.images["twoPlayerButton"].pressed(mouse_pos):
-            return 2
+        if self.active:
+            if self.images["onePlayerButton"].pressed(mouse_pos):
+                return 1
+            elif self.images["twoPlayerButton"].pressed(mouse_pos):
+                return 2
         return 0
             
     
