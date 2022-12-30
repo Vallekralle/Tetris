@@ -21,10 +21,15 @@ class Window:
         pygame.display.set_caption(self.name)
         
         
-    def draw(self, menu:object):
+    def draw(self, menu:object, board:object):
         self.clock.tick(self.fps)
         
-        menu.draw(self.window) if menu.active else False
+        self.window.fill((255, 255, 255))
+        
+        if menu.active:
+            menu.draw(self.window)
+        else:
+            board.draw(self.window)    
         
         pygame.display.update()
         
