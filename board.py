@@ -27,6 +27,10 @@ class Board():
         y = self.padY
         
         for i in range(1, self.amount + 1):
+            # Background for the grid
+            self.frame_list.insert(0, [pygame.Rect(x, y, self.frameWidth, self.frameHeight)])
+            
+            # Creating the grid    
             for horizontal in range(21):
                 rect_list.append(pygame.Rect(x, y, self.frameWidth, self.rectSize))
                 y += self.tetromino_height
@@ -34,14 +38,17 @@ class Board():
             
             for vertical in range(11):
                 rect_list.append(pygame.Rect(x, y, self.rectSize, self.frameHeight))
-                x += self.tetromino_height
-                
+                x += self.tetromino_height            
+            
             x = (self.win_width // 2 - self.frameWidth // 2) + self.win_width // 4
             
         self.frame_list.append(rect_list)
                 
         
     def draw(self, win):
-        for frame in self.frame_list:
+        for ind, frame in enumerate(self.frame_list):
             for rect in frame:
-                pygame.draw.rect(win, (0, 0, 0), rect)
+                if ind <= self.amount - 1:
+                    pygame.draw.rect(win, (255, 255, 255), rect)
+                else:
+                    pygame.draw.rect(win, (0, 0, 0), rect)
