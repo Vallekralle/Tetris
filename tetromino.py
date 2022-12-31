@@ -1,4 +1,5 @@
 import pygame
+from time import sleep
 pygame.init()
 
 
@@ -12,11 +13,24 @@ class Tetromino:
         self.y = y
         self.tetromino_size = tetromino_size
         self.offset = offset // 2
-    
-      
-    def move(self):
-        pass
         
+        
+    def move(self, padY, frameHeight, speed, spawnNewTetromino):
+        while(self.grounded(padY, frameHeight)):
+            sleep(speed)
+            
+            for block in self.block_list:
+                block.move(self.tetromino_size)  
+        else:
+            spawnNewTetromino()
+                
+                
+    def grounded(self, padY, frameHeight):
+        for block in self.block_list:
+            if block.y + self.tetromino_size > padY + frameHeight:
+                return False
+        return True
+    
     
     def draw(self, win):
         for block in self.block_list:

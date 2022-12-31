@@ -1,5 +1,6 @@
 import pygame
 from random import randint
+from threading import Thread
 
 from otetromino import Otetromino
 from ztetromino import Ztetromino
@@ -13,11 +14,13 @@ pygame.init()
 
 
 class Spawner:
-    def __init__(self, x, y, tetromino_size, offset):
+    def __init__(self, x, y, tetromino_size, offset, padY, frameHeight):
         self.x = x
         self.y = y
         self.tetromino_size = tetromino_size
         self.offset = offset
+        self.padY = padY
+        self.frameHeight = frameHeight
         
         self.spawnList = []
         
@@ -36,3 +39,6 @@ class Spawner:
         
     def spawnTetromino(self):
         self.spawnList.append(self.tetrominoes[randint(0, len(self.tetrominoes) - 1)])
+        self.thread = Thread(target=self.spawnList[-1].move,
+                             args=[self.padY, self.frameHeight, 0.5, self.spawnTetromino])
+        self.thread.start()

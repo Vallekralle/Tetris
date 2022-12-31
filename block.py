@@ -9,3 +9,7 @@ class Block:
         self.y = y
         self.width = width
         self.height = height
+        
+        
+    def move(self, tetromino_size):
+        self.y += tetromino_size

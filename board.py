@@ -7,6 +7,7 @@ pygame.init()
 
 class Board():
     frame_list = []
+    tetromino_spawner = []
     
     
     def __init__(self, win_width:int, win_height:int, padY:int, rectSize:int, amount:int):
@@ -20,8 +21,6 @@ class Board():
         
         self.frameWidth = self.tetromino_size * 10
         self.frameHeight = self.tetromino_size * 20
-        
-        self.tetromino_spawner = []
         
         self.createFrame()
         
@@ -54,7 +53,7 @@ class Board():
          
          
     def createSpawner(self, x, y):
-        self.tetromino_spawner.append(Spawner(x, y, self.tetromino_size, self.rectSize))
+        self.tetromino_spawner.append(Spawner(x, y, self.tetromino_size, self.rectSize, self.padY, self.frameHeight))
                 
                 
     def drawBackground(self, win):

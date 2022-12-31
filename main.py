@@ -12,7 +12,7 @@ main_menu = Menu(WIN.width, WIN.height)
 game_board = object
 
 
-def main():
+def main(): 
     run = True
     
     while(run):
@@ -20,7 +20,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-                break
+                pygame.quit()
             
             if event.type == pygame.MOUSEBUTTONDOWN:
                 match main_menu.chooseMode(pygame.mouse.get_pos()):
