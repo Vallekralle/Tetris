@@ -7,26 +7,18 @@ pygame.init()
 
 
 class Ztetromino(Tetromino):
-    block_list = []
-    
-    def __init__(self, x, y, tetromino_size, xOffset, yOffset):
-        super().__init__()
+    def __init__(self, x, y, tetromino_size, offset):
+        super().__init__(x, y, tetromino_size, offset)
                 
-        self.x = x
-        self.y = y
-        self.tetromino_size = tetromino_size
-        self.xOffset = xOffset // 2
-        self.yOffset = yOffset // 2
-        
-        self.red = (255, 0, 0)
+        self.color = (255, 0, 0)
         
         self.createBlockList()
         
         
     def createBlockList(self):
         self.block_list = [
-            Block(self.red, self.x + self.tetromino_size * 3 + self.xOffset, self.y + self.yOffset, self.tetromino_size, self.tetromino_size),
-            Block(self.red, self.x + self.tetromino_size * 4 + self.xOffset, self.y + self.yOffset, self.tetromino_size, self.tetromino_size),
-            Block(self.red, self.x + self.tetromino_size * 4 + self.xOffset, self.y + self.tetromino_size + self.yOffset, self.tetromino_size, self.tetromino_size),
-            Block(self.red, self.x + self.tetromino_size * 5 + self.xOffset, self.y + self.tetromino_size + self.yOffset, self.tetromino_size, self.tetromino_size)
+            Block(self.color, self.x + self.tetromino_size * 3 + self.offset, self.y + self.offset, self.tetromino_size, self.tetromino_size),
+            Block(self.color, self.x + self.tetromino_size * 4 + self.offset, self.y + self.offset, self.tetromino_size, self.tetromino_size),
+            Block(self.color, self.x + self.tetromino_size * 4 + self.offset, self.y + self.tetromino_size + self.offset, self.tetromino_size, self.tetromino_size),
+            Block(self.color, self.x + self.tetromino_size * 5 + self.offset, self.y + self.tetromino_size + self.offset, self.tetromino_size, self.tetromino_size)
         ]

@@ -54,7 +54,7 @@ class Board():
          
          
     def createSpawner(self, x, y):
-        self.tetromino_spawner.append(Spawner(x, y, self.tetromino_size, self.rectSize, self.rectSize))
+        self.tetromino_spawner.append(Spawner(x, y, self.tetromino_size, self.rectSize))
                 
                 
     def drawBackground(self, win):

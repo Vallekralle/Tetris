@@ -6,27 +6,19 @@ from block import Block
 pygame.init()
 
 
-class Ttetromino(Tetromino):
-    block_list = []
-    
-    def __init__(self, x, y, tetromino_size, xOffset, yOffset):
-        super().__init__()
+class Ttetromino(Tetromino):    
+    def __init__(self, x, y, tetromino_size, offset):
+        super().__init__(x, y, tetromino_size, offset)
                 
-        self.x = x
-        self.y = y
-        self.tetromino_size = tetromino_size
-        self.xOffset = xOffset // 2
-        self.yOffset = yOffset // 2
-        
-        self.purple = (240, 0, 255)
-        
+        self.color = (240, 0, 255)
+                
         self.createBlockList()
         
         
     def createBlockList(self):
         self.block_list = [
-            Block(self.purple, self.x + self.tetromino_size * 4 + self.xOffset, self.y + self.yOffset, self.tetromino_size, self.tetromino_size),
-            Block(self.purple, self.x + self.tetromino_size * 3 + self.xOffset, self.y + self.tetromino_size + self.yOffset, self.tetromino_size, self.tetromino_size),
-            Block(self.purple, self.x + self.tetromino_size * 4 + self.xOffset, self.y + self.tetromino_size + self.yOffset, self.tetromino_size, self.tetromino_size),
-            Block(self.purple, self.x + self.tetromino_size * 5 + self.xOffset, self.y + self.tetromino_size + self.yOffset, self.tetromino_size, self.tetromino_size),
+            Block(self.color, self.x + self.tetromino_size * 4 + self.offset, self.y + self.offset, self.tetromino_size, self.tetromino_size),
+            Block(self.color, self.x + self.tetromino_size * 3 + self.offset, self.y + self.tetromino_size + self.offset, self.tetromino_size, self.tetromino_size),
+            Block(self.color, self.x + self.tetromino_size * 4 + self.offset, self.y + self.tetromino_size + self.offset, self.tetromino_size, self.tetromino_size),
+            Block(self.color, self.x + self.tetromino_size * 5 + self.offset, self.y + self.tetromino_size + self.offset, self.tetromino_size, self.tetromino_size),
         ]

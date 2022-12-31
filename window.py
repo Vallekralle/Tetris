@@ -39,5 +39,4 @@ class Window:
     def drawTetrominoes(self, board):
         for spawner in board.tetromino_spawner:
             for tetromino in spawner.spawnList: 
-                for block in tetromino.block_list:
-                    block.draw(self.window)
+                tetromino.draw(self.window)

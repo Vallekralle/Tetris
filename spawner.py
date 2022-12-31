@@ -13,23 +13,22 @@ pygame.init()
 
 
 class Spawner:
-    def __init__(self, x, y, tetromino_size, xOffset, yOffset):
+    def __init__(self, x, y, tetromino_size, offset):
         self.x = x
         self.y = y
         self.tetromino_size = tetromino_size
-        self.xOffset = xOffset
-        self.yOffset = yOffset
+        self.offset = offset
         
         self.spawnList = []
         
         self.tetrominoes = [
-            Otetromino(self.x, self.y, self.tetromino_size, xOffset, yOffset),
-            Ztetromino(self.x, self.y, self.tetromino_size, xOffset, yOffset),
-            Stetromino(self.x, self.y, self.tetromino_size, xOffset, yOffset),
-            Ttetromino(self.x, self.y, self.tetromino_size, xOffset, yOffset),
-            Itetromino(self.x, self.y, self.tetromino_size, xOffset, yOffset),
-            Ltetromino(self.x, self.y, self.tetromino_size, xOffset, yOffset),
-            Jtetromino(self.x, self.y, self.tetromino_size, xOffset, yOffset)
+            Otetromino(self.x, self.y, self.tetromino_size, offset),
+            Ztetromino(self.x, self.y, self.tetromino_size, offset),
+            Stetromino(self.x, self.y, self.tetromino_size, offset),
+            Ttetromino(self.x, self.y, self.tetromino_size, offset),
+            Itetromino(self.x, self.y, self.tetromino_size, offset),
+            Ltetromino(self.x, self.y, self.tetromino_size, offset),
+            Jtetromino(self.x, self.y, self.tetromino_size, offset)
         ]
         
         self.spawnTetromino()
