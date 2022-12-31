@@ -29,14 +29,15 @@ class Window:
         if menu.active:
             menu.draw(self.window)
         else:
-            board.draw(self.window)    
-        
+            board.drawBackground(self.window)
+            self.drawTetrominoes(board)
+            board.drawGrid(self.window)
+            
         pygame.display.update()
         
-        
-    def addToList(self, newList:list):
-        self.drawing_list.extend(newList)
     
-    
-    def resetList(self):
-        self.drawing_list.clear()
+    def drawTetrominoes(self, board):
+        for spawner in board.tetromino_spawner:
+            for tetromino in spawner.spawnList: 
+                for block in tetromino.block_list:
+                    block.draw(self.window)

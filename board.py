@@ -1,4 +1,7 @@
 import pygame
+
+from spawner import Spawner
+
 pygame.init()
 
 
@@ -18,6 +21,8 @@ class Board():
         self.frameWidth = self.tetromino_size * 10
         self.frameHeight = self.tetromino_size * 20
         
+        self.tetromino_spawner = []
+        
         self.createFrame()
         
 
@@ -30,7 +35,10 @@ class Board():
             # Background for the grid
             self.frame_list.insert(0, [pygame.Rect(x, y, self.frameWidth, self.frameHeight)])
             
-            # Creating the grid    
+            # Tetromino spawner
+            self.createSpawner(x, y)
+            
+            # Creating the grid   
             for horizontal in range(21):
                 rect_list.append(pygame.Rect(x, y, self.frameWidth, self.rectSize))
                 y += self.tetromino_size
@@ -43,12 +51,21 @@ class Board():
             x = (self.win_width // 2 - self.frameWidth // 2) + self.win_width // 4
             
         self.frame_list.append(rect_list)
+         
+         
+    def createSpawner(self, x, y):
+        self.tetromino_spawner.append(Spawner(x, y, self.tetromino_size, self.rectSize, self.rectSize))
                 
-        
-    def draw(self, win):
+                
+    def drawBackground(self, win):
         for ind, frame in enumerate(self.frame_list):
             for rect in frame:
                 if ind <= self.amount - 1:
                     pygame.draw.rect(win, (255, 255, 255), rect)
-                else:
+    
+    
+    def drawGrid(self, win):
+        for ind, frame in enumerate(self.frame_list):
+            for rect in frame:
+                if ind > self.amount - 1:
                     pygame.draw.rect(win, (0, 0, 0), rect)
