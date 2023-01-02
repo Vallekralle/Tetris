@@ -13,5 +13,10 @@ class Block:
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
         
         
-    def move(self, tetromino_size):
-        self.y += tetromino_size
+    def moveDirection(self, tetromino_size, direction):
+        if direction == "down":
+            self.y += tetromino_size
+        elif direction == "left":
+            self.x -= tetromino_size
+        elif direction == "right":
+            self.x += tetromino_size

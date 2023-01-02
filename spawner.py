@@ -1,5 +1,5 @@
 import pygame
-from random import randint
+from random import choice
 from threading import Thread
 
 from otetromino import Otetromino
@@ -31,24 +31,23 @@ class Spawner:
             Ttetromino(self.x, self.y, self.tetromino_size, offset),
             Itetromino(self.x, self.y, self.tetromino_size, offset),
             Ltetromino(self.x, self.y, self.tetromino_size, offset),
-            Jtetromino(self.x, self.y, self.tetromino_size, offset)
+            Jtetromino(self.x, self.y, self.tetromino_size, offset),
         ]
         
         self.spawnTetromino()
         
         
     def spawnTetromino(self):
-        self.spawnList.append(self.tetrominoes[randint(0, len(self.tetrominoes) - 1)])
+        self.spawnList.append(choice(self.tetrominoes))
         thread = Thread(target=self.spawnList[-1].fall,
-                        args=[self.padY, self.frameHeight, 0.3, self.spawnTetromino, self.spawnList])
+                        args=[self.padY, self.tetromino_size * 20, 0.3, self.spawnTetromino, self.spawnList])
         thread.start()
         
     
     def dPadInput(self, button:int):
-        #thread = Thread(target=self.spawnList[-1].move,
-                        #args=[])
-        #thread.start()
-        pass
+        thread = Thread(target=self.spawnList[-1].move,
+                        args=[button, self.x, self.tetromino_size * 10, self.spawnList])
+        thread.start()
     
     
     def xInput(self):

@@ -18,13 +18,10 @@ class Tetromino:
     def fall(self, padY, frameHeight, speed, spawnNewTetromino, spawnList):
         while(not self.grounded(padY, frameHeight) and not self.collided(spawnList)):
             sleep(speed)
-            
-            for block in self.block_list:
-                block.move(self.tetromino_size)
-                
+            self.moveBlock("down")
         else:
             spawnNewTetromino()
-                
+    
                 
     def grounded(self, padY, frameHeight):
         # Checks if this tetromino collided with the ground
@@ -44,11 +41,41 @@ class Tetromino:
                 
             
     def isColliding(self, other_block):
+        # Other part of the method collided()
         for this_block in self.block_list:
             if this_block.y + self.tetromino_size >= other_block.y and this_block.x == other_block.x:
                 return True
         return False
+    
+    
+    def move(self, button, xPos, frameWidth, spawnList):
+        if button == 13 and not self.leftWall(xPos):
+            self.moveBlock("left")
+        if button == 14 and not self.rightWall(xPos, frameWidth):
+            self.moveBlock("right")
+            
+            
+    def leftWall(self, xPos):
+        # Checks if the tetromino collides with the left wall
+        for block in self.block_list:
+            if block.x - self.tetromino_size < xPos:
+                return True
+        return False
+    
+    
+    def rightWall(self, xPos, frameWidth):
+        # Checks if the tetromino collides with the right wall
+        for block in self.block_list:
+            if block.x + self.tetromino_size > xPos + frameWidth:
+                return True
+        return False
 
+
+    def moveBlock(self, direction):
+        # Move all blocks in one direction
+        for block in self.block_list:
+            block.moveDirection(self.tetromino_size, direction)
+        
     
     def draw(self, win):
         for block in self.block_list:
