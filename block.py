@@ -10,6 +10,8 @@ class Block:
         self.width = width
         self.height = height
         
+        self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        
         
     def move(self, tetromino_size):
         self.y += tetromino_size

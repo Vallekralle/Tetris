@@ -39,6 +39,17 @@ class Spawner:
         
     def spawnTetromino(self):
         self.spawnList.append(self.tetrominoes[randint(0, len(self.tetrominoes) - 1)])
-        self.thread = Thread(target=self.spawnList[-1].move,
-                             args=[self.padY, self.frameHeight, 0.5, self.spawnTetromino])
-        self.thread.start()
+        thread = Thread(target=self.spawnList[-1].fall,
+                        args=[self.padY, self.frameHeight, 0.3, self.spawnTetromino, self.spawnList])
+        thread.start()
+        
+    
+    def dPadInput(self, button:int):
+        #thread = Thread(target=self.spawnList[-1].move,
+                        #args=[])
+        #thread.start()
+        pass
+    
+    
+    def xInput(self):
+        pass
