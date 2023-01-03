@@ -51,7 +51,7 @@ class Spawner:
         if button == 9 or button == 10:
             # Rotate the current tetromino clockwise or counterclockwise
             thread1 = Thread(target=self.spawnList[-1].rotate,
-                             args=[])
+                             args=[button])
             thread1.start()
             
         elif button == 13 or button == 14:

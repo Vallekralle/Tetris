@@ -6,7 +6,7 @@ pygame.init()
 class Tetromino:
     color = ()
     block_list = []
-    rotation_list = []
+    defaultBlock = []
     
     
     def __init__(self, x, y, tetromino_size, offset):
@@ -38,11 +38,14 @@ class Tetromino:
     
     
     """Rotation"""
-    def rotate(self):
-        pass
+    def rotate(self, button):
+        if button == 9:
+            pass
+        if button == 10:
+            pass
     
     
-    """Collsion with the game board"""        
+    """Collsion with the game board""" 
     def grounded(self, padY, frameHeight):
         for block in self.block_list:
             if block.y + self.tetromino_size > padY + frameHeight:
