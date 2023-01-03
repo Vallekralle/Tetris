@@ -32,14 +32,12 @@ class Tetromino:
             
             
     def moveBlock(self, direction):
-        # Move all blocks in one direction
         for block in self.block_list:
             block.moveDirection(self.tetromino_size, direction)
     
     
     """Collsion with the game board"""        
     def grounded(self, padY, frameHeight):
-        # Checks if this tetromino collided with the ground
         for block in self.block_list:
             if block.y + self.tetromino_size > padY + frameHeight:
                 return True
@@ -47,7 +45,6 @@ class Tetromino:
     
     
     def leftWall(self, xPos):
-        # Checks if the tetromino collides with the left wall
         for block in self.block_list:
             if block.x - self.tetromino_size < xPos:
                 return True
@@ -55,7 +52,6 @@ class Tetromino:
     
     
     def rightWall(self, xPos, frameWidth):
-        # Checks if the tetromino collides with the right wall
         for block in self.block_list:
             if block.x + self.tetromino_size > xPos + frameWidth:
                 return True
@@ -64,33 +60,29 @@ class Tetromino:
     
     """Collsion with other tetrominoes"""
     def collided(self, spawnList, site):
-        # Checks if the tetromino collided with other tetrominoes
         for ind in range(0, len(spawnList) - 1):
             for other_block in spawnList[ind].block_list:
-                if site(other_block):
-                    return True
+                for this_block in self.block_list:
+                    if site(this_block, other_block):
+                        return True
         return False
                 
             
-    def bottomSideCollsion(self, other_block):
-        # Other part of the method collided()
-        for this_block in self.block_list:
-            if this_block.y + self.tetromino_size >= other_block.y and this_block.x == other_block.x and not this_block.y >= other_block.y + self.tetromino_size:
-                return True
+    def bottomSideCollsion(self, this_block, other_block):
+        if this_block.y + self.tetromino_size >= other_block.y and this_block.x == other_block.x and not this_block.y >= other_block.y + self.tetromino_size:
+            return True
         return False
     
     
-    def leftSideCollsion(self, other_block):
-        for this_block in self.block_list:
-            if this_block.x == other_block.x + self.tetromino_size and this_block.y == other_block.y:
-                return True
+    def leftSideCollsion(self, this_block, other_block):
+        if this_block.x == other_block.x + self.tetromino_size and this_block.y == other_block.y:
+            return True
         return False
 
 
-    def rightSideCollsion(self, other_block):
-        for this_block in self.block_list:
-            if this_block.x + self.tetromino_size == other_block.x and this_block.y == other_block.y:
-                return True
+    def rightSideCollsion(self, this_block, other_block):
+        if this_block.x + self.tetromino_size == other_block.x and this_block.y == other_block.y:
+            return True
         return False
         
     
