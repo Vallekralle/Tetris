@@ -47,12 +47,15 @@ class Spawner:
         thread.start()
         
     
-    def dPadInput(self, button:int):
-        # Move the current tetromino to the right or left
-        thread = Thread(target=self.spawnList[-1].move,
-                        args=[button, self.x, self.tetromino_size * 10, self.spawnList])
-        thread.start()
-    
-    
-    def xInput(self):
-        pass
+    def joyStickInput(self, button:int):
+        if button == 9 or button == 10:
+            # Rotate the current tetromino clockwise or counterclockwise
+            thread1 = Thread(target=self.spawnList[-1].rotate,
+                             args=[])
+            thread1.start()
+            
+        elif button == 13 or button == 14:
+            # Move the current tetromino to the right or left
+            thread2 = Thread(target=self.spawnList[-1].move,
+                            args=[button, self.x, self.tetromino_size * 10, self.spawnList])
+            thread2.start()

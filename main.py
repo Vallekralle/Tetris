@@ -55,20 +55,24 @@ def initializeJoysticks():
 def joyEventHandler():
     global joysticks
 
-    if joysticks[0].get_button(0):
-        print("[Controller 1]: Pressed cross button!")
-    if joysticks[0].get_button(13):
-        game_board.tetromino_spawner[0].dPadInput(13)
-    if joysticks[0].get_button(14):
-        game_board.tetromino_spawner[0].dPadInput(14)
+    if joysticks[0].get_button(9): # left bumper
+        game_board.tetromino_spawner[0].joyStickInput(9)
+    if joysticks[0].get_button(10): # right bumper
+        game_board.tetromino_spawner[0].joyStickInput(10)
+    if joysticks[0].get_button(13): # left D-pad
+        game_board.tetromino_spawner[0].joyStickInput(13)
+    if joysticks[0].get_button(14): # right D-pad
+        game_board.tetromino_spawner[0].joyStickInput(14)
     
     if len(joysticks) == 2:
-        if joysticks[1].get_button(0):
-            print("[Controller 2]: Pressed cross button!")
-        if joysticks[1].get_button(13):
-            game_board.tetromino_spawner[1].dPadInput(13)
-        if joysticks[1].get_button(14):
-            game_board.tetromino_spawner[1].dPadInput(14)
+        if joysticks[1].get_button(9): # left bumper
+            game_board.tetromino_spawner[1].joyStickInput(9)
+        if joysticks[1].get_button(10): # right bumper
+            game_board.tetromino_spawner[1].joyStickInput(10)
+        if joysticks[1].get_button(13): # left D-pad
+            game_board.tetromino_spawner[1].joyStickInput(13)
+        if joysticks[1].get_button(14): # right D-pad
+            game_board.tetromino_spawner[1].joyStickInput(14)
     
 
 if __name__ == "__main__":

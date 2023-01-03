@@ -6,6 +6,7 @@ pygame.init()
 class Tetromino:
     color = ()
     block_list = []
+    rotation_list = []
     
     
     def __init__(self, x, y, tetromino_size, offset):
@@ -34,6 +35,11 @@ class Tetromino:
     def moveBlock(self, direction):
         for block in self.block_list:
             block.moveDirection(self.tetromino_size, direction)
+    
+    
+    """Rotation"""
+    def rotate(self):
+        pass
     
     
     """Collsion with the game board"""        
@@ -84,7 +90,7 @@ class Tetromino:
         if this_block.x + self.tetromino_size == other_block.x and this_block.y == other_block.y:
             return True
         return False
-        
+    
     
     """Drawing the tetromino"""
     def draw(self, win):
