@@ -1,6 +1,7 @@
 import pygame
 from random import choice
 from threading import Thread
+import copy
 
 from otetromino import Otetromino
 from ztetromino import Ztetromino
@@ -38,13 +39,16 @@ class Spawner:
         
         
     def spawnTetromino(self):
-        self.spawnList.append(choice(self.tetrominoes))
+        # Create new random tetromino and let it fall
+        newTetromino = copy.deepcopy(choice(self.tetrominoes))
+        self.spawnList.append(newTetromino)
         thread = Thread(target=self.spawnList[-1].fall,
                         args=[self.padY, self.tetromino_size * 20, 0.3, self.spawnTetromino, self.spawnList])
         thread.start()
         
     
     def dPadInput(self, button:int):
+        # Move the current tetromino to the right or left
         thread = Thread(target=self.spawnList[-1].move,
                         args=[button, self.x, self.tetromino_size * 10, self.spawnList])
         thread.start()
