@@ -54,7 +54,6 @@ def initializeJoysticks():
     
 def joyEventHandler():
     global joysticks
-    global game_board
 
     if joysticks[0].get_button(0):
         print("[Controller 1]: Pressed cross button!")
@@ -63,7 +62,7 @@ def joyEventHandler():
     if joysticks[0].get_button(14):
         game_board.tetromino_spawner[0].dPadInput(14)
     
-    if len(game_board.tetromino_spawner) == 2:
+    if len(joysticks) == 2:
         if joysticks[1].get_button(0):
             print("[Controller 2]: Pressed cross button!")
         if joysticks[1].get_button(13):
