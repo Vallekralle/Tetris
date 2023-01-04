@@ -1,4 +1,5 @@
 import pygame
+from win11toast import toast
 
 from window import Window
 from menu import Menu
@@ -14,6 +15,7 @@ joysticks = []
 
 
 def main():
+    initializeJoysticks()
     run = True
     
     while(run):
@@ -26,20 +28,29 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 match main_menu.chooseMode(pygame.mouse.get_pos()):
                     case 1:
-                        createBoard(10, 2, 1)
+                        if not toastNotification(1):
+                            createBoard(10, 2, 1)
                     case 2:
-                        createBoard(10, 2, 2)
+                        if not toastNotification(2):
+                            createBoard(10, 2, 2)
                         
             if event.type == pygame.JOYBUTTONDOWN:
                 joyEventHandler()
         
         WIN.draw(main_menu, game_board)
         
+        
+def toastNotification(controllerCount:int):
+    if len(joysticks) < controllerCount:
+        msg = "You need " + str(controllerCount) + " controller/s connected!"
+        toast("[Controller Error]",
+               msg)
+        return True
+    return False
+
 
 def createBoard(padY:int, rectSize:int, amount:int):
     global game_board
-
-    initializeJoysticks()
     
     game_board = Board(WIN.width, WIN.height, padY, rectSize, amount)
     main_menu.deactivate()
