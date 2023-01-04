@@ -6,7 +6,8 @@ pygame.init()
 class Tetromino:
     color = ()
     block_list = []
-    defaultBlock = []
+    rotation_list = []
+    rotInd = 0
     
     
     def __init__(self, x, y, tetromino_size, offset):
@@ -40,9 +41,24 @@ class Tetromino:
     """Rotation"""
     def rotate(self, button):
         if button == 9:
-            pass
+            self.rotInd -= 1
+            self.changeRotInd()
+            self.rotateBlocks(-1)
         if button == 10:
-            pass
+            self.rotInd += 1
+            self.changeRotInd()
+            self.rotateBlocks(1)
+            
+            
+    def changeRotInd(self):
+        if self.rotInd == -1:
+            self.rotInd = 3
+        elif self.rotInd == 4:
+            self.rotInd = 0
+
+
+    def rotateBlocks(self):
+        pass
     
     
     """Collsion with the game board""" 
