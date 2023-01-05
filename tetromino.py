@@ -57,7 +57,7 @@ class Tetromino:
             self.rotInd = 0
 
 
-    def rotateBlocks(self):
+    def rotateBlocks(self, dirNum):
         pass
     
     
