@@ -43,7 +43,7 @@ class Spawner:
         newTetromino = copy.deepcopy(choice(self.tetrominoes))
         self.spawnList.append(newTetromino)
         thread = Thread(target=self.spawnList[-1].fall,
-                        args=[self.padY, self.tetromino_size * 20, 0.5, self.spawnTetromino, self.spawnList])
+                        args=[self.padY, self.tetromino_size * 20, 0.3, self.spawnTetromino, self.spawnList])
         thread.start()
         
     

@@ -18,7 +18,7 @@ class Jtetromino(Tetromino):
     def rotateBlocks(self, dirNum):
         self.rotation_list = [
             [
-                Block((255, 0, 0), self.block_list[0].x - self.tetromino_size * 2 if dirNum == -1 else self.block_list[0].x, self.block_list[0].y - self.tetromino_size * 2 if dirNum == 1 else self.block_list[0].y, self.tetromino_size, self.tetromino_size),
+                Block(self.color, self.block_list[0].x - self.tetromino_size * 2 if dirNum == -1 else self.block_list[0].x, self.block_list[0].y - self.tetromino_size * 2 if dirNum == 1 else self.block_list[0].y, self.tetromino_size, self.tetromino_size),
                 Block(self.color, self.block_list[1].x - self.tetromino_size, self.block_list[1].y + (self.tetromino_size * (-(dirNum))), self.tetromino_size, self.tetromino_size),
                 Block(self.color, self.block_list[2].x, self.block_list[2].y, self.tetromino_size, self.tetromino_size),
                 Block(self.color, self.block_list[3].x + self.tetromino_size, self.block_list[3].y + (self.tetromino_size * (dirNum)), self.tetromino_size, self.tetromino_size),
