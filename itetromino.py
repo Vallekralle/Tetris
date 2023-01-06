@@ -43,7 +43,7 @@ class Itetromino(Tetromino):
             ],
         ]
         
-        self.block_list = self.rotation_list[self.rotInd]
+        return self.rotation_list[self.rotInd]
         
         
     def createBlockList(self):

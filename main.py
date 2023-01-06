@@ -35,7 +35,8 @@ def main():
                             createBoard(10, 2, 2)
                         
             if event.type == pygame.JOYBUTTONDOWN:
-                joyEventHandler()
+                if not main_menu.active:
+                    joyEventHandler()
         
         WIN.draw(main_menu, game_board)
         

@@ -39,15 +39,39 @@ class Tetromino:
     
     
     """Rotation"""
-    def rotate(self, button):
+    def rotate(self, button, spawnList, xPos, padY):
         if button == 9:
-            self.rotInd -= 1
-            self.changeRotInd()
-            self.rotateBlocks(-1)
+            self.canRotate(-1, spawnList, xPos, padY)
         if button == 10:
-            self.rotInd += 1
+            self.canRotate(1, spawnList, xPos, padY)
+            
+    
+    def canRotate(self, newInd, spawnList, xPos, padY):
+        self.rotInd = self.rotInd + (newInd)
+        self.changeRotInd()
+        if(not self.rotationCollision(spawnList, self.rotateBlocks(newInd))
+           and not self.wallCollision(xPos, padY)):
+            self.block_list = self.rotateBlocks(newInd)
+        else:
+            self.rotInd = self.rotInd + (-(newInd))
             self.changeRotInd()
-            self.rotateBlocks(1)
+            
+            
+    def wallCollision(self, xPos, padY):
+        for this_block in self.rotation_list[self.rotInd]:
+            if (this_block.x < xPos or this_block.x + self.tetromino_size > xPos + self.tetromino_size * 11 or
+                this_block.y < padY or this_block.y + self.tetromino_size > padY + self.tetromino_size * 20):
+                    return True
+        return False
+            
+            
+    def rotationCollision(self, spawnList, rotation_list):
+        for ind in range(0, len(spawnList) - 1):
+            for other_block in spawnList[ind].block_list:
+                for this_block in rotation_list:
+                    if (this_block.x == other_block.x and this_block.y == other_block.y):
+                        return True
+        return False
             
             
     def changeRotInd(self):
