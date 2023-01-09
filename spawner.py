@@ -46,7 +46,58 @@ class Spawner:
                         args=[self.padY, self.tetromino_size * 20, 0.3, self.spawnTetromino, self.spawnList])
         thread.start()
         
+        if len(self.spawnList) > 1:
+            thread2 = Thread(target=self.spawnList[-2].gameOver,
+                            args=[self.padY])
+            thread2.start()
+            
+            thread3 = Thread(target=self.checkingLines,
+                             args=[])
+            thread3.start()
+            
+            
+    """Deleting lines"""
+    def checkingLines(self):
+        yPos, positions = self.y + self.frameHeight, []
+        
+        for i in range(0, 21):
+            yPos -= self.tetromino_size
+            if self.positionTaken(yPos):
+                self.deleteLines(yPos)
+                positions.append(yPos)
+        
+        self.deleteStep(positions)
+            
+            
+    def positionTaken(self, yPos):
+        taken = 0
+        
+        for ind in range(0, len(self.spawnList) - 1):
+            for block in self.spawnList[ind].block_list:
+                if block.y - self.offset // 2 == yPos:
+                    taken += 1
+
+        if taken == 10:
+            return True
+        return False
     
+    
+    def deleteLines(self, yPos):
+        for tetroInd in range(0, len(self.spawnList) - 1):
+            for blockInd in range(len(self.spawnList[tetroInd].block_list) - 1, -1, -1):
+                if self.spawnList[tetroInd].block_list[blockInd].y - self.offset // 2 == yPos:
+                    self.spawnList[tetroInd].block_list.pop(blockInd)
+        
+    
+    def deleteStep(self, positions):
+        for pos in range(0, len(positions)):
+            for ind in range(0, len(self.spawnList) - 1):
+                for block in self.spawnList[ind].block_list:
+                    if block.y < positions[pos]:
+                        block.moveDirection(self.tetromino_size, "down")
+        
+    
+    """Threads for joystick inputs"""
     def joyStickInput(self, button:int):
         if button == 9 or button == 10:
             # Rotate the current tetromino clockwise or counterclockwise
