@@ -23,6 +23,7 @@ class Spawner:
         self.padY = padY
         self.frameHeight = frameHeight
         
+        self.gameOverState = False
         self.spawnList = []
         
         self.tetrominoes = [
@@ -39,21 +40,22 @@ class Spawner:
         
         
     def spawnTetromino(self):
-        # Create new random tetromino and let it fall
-        newTetromino = copy.deepcopy(choice(self.tetrominoes))
-        self.spawnList.append(newTetromino)
-        thread = Thread(target=self.spawnList[-1].fall,
-                        args=[self.padY, self.tetromino_size * 20, 0.3, self.spawnTetromino, self.spawnList])
-        thread.start()
-        
-        if len(self.spawnList) > 1:
-            thread2 = Thread(target=self.spawnList[-2].gameOver,
-                            args=[self.padY])
-            thread2.start()
+        if not self.gameOverState:
+            # Create new random tetromino and let it fall
+            newTetromino = copy.deepcopy(choice(self.tetrominoes))
+            self.spawnList.append(newTetromino)
+            thread = Thread(target=self.spawnList[-1].fall,
+                            args=[self.padY, self.tetromino_size * 20, 0.3, self.spawnTetromino, self.spawnList])
+            thread.start()
             
-            thread3 = Thread(target=self.checkingLines,
-                             args=[])
-            thread3.start()
+            if len(self.spawnList) > 1:
+                thread2 = Thread(target=self.spawnList[-2].gameOver,
+                                args=[self.padY])
+                thread2.start()
+                
+                thread3 = Thread(target=self.checkingLines,
+                                args=[])
+                thread3.start()
             
             
     """Deleting lines"""
@@ -64,7 +66,7 @@ class Spawner:
             yPos -= self.tetromino_size
             if self.positionTaken(yPos):
                 self.deleteLines(yPos)
-                positions.append(yPos)
+                positions.insert(0, yPos)
         
         self.deleteStep(positions)
             
@@ -90,10 +92,10 @@ class Spawner:
         
     
     def deleteStep(self, positions):
-        for pos in range(0, len(positions)):
+        for pos in positions:
             for ind in range(0, len(self.spawnList) - 1):
                 for block in self.spawnList[ind].block_list:
-                    if block.y < positions[pos]:
+                    if block.y < pos:
                         block.moveDirection(self.tetromino_size, "down")
         
     

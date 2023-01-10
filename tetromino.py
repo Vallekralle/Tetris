@@ -139,7 +139,8 @@ class Tetromino:
     def gameOver(self, padY):
         for block in self.block_list:
             if block.y - self.offset == padY:
-                print("Game over")
+                return True
+        return False
     
     
     """Drawing the tetromino"""
